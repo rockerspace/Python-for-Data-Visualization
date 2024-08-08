@@ -25,8 +25,8 @@ app = dash.Dash(__name__)
 #---------------------------------------------------------------------------------
 # Create the dropdown menu options
 dropdown_options = [
-    {'label': '...........', 'value': 'Yearly Statistics'},
-    {'label': 'Recession Period Statistics', 'value': '.........'}
+    {'label': 'Yearly Statistics', 'value': 'Yearly Statistics'},
+    {'label': 'Recession Period Statistics', 'value': 'Recession Period Statistics'}
 ]
 # List of years 
 year_list = [i for i in range(1980, 2024, 1)]
@@ -37,28 +37,33 @@ app.layout = html.Div([
     html.H1("Automobile Sales Statistics Dashboard", 
         style={"textAlign": "center", 
                "color": "#503D36", 
-               "fontSize": 24})
-        ])
+               "fontSize": 24}),
+        
     #TASK 2.2: Add two dropdown menus
 html.Div([
     html.Label("Select Statistics:"),
         dcc.Dropdown(
             id='dropdown-statistics',
             label ='Yearly Statistics',
+options=[
+                {'label': 'Yearly Statistics', 'value': 'Yearly Statistics'},
+                {'label': 'Recession Period Statistics', 'value' : 'Recession Period Statistics'} 
+        ],
+value='Select Statistics',
             value='Yearly Statistics',
             placeholder='Select a report type'
         )
     ]),
 html.Div(dcc.Dropdown(
             id='Select-year',
-            options=[{'label': i, 'value': i} for i in year_list],
+            options=[{'label': i, 'value': i} for i in year_list], style={'display':'flex'}),])
             value='Select-year'
             
         )),
 html.Div([#TASK 2.3: Add a division for output display
 html.Div(id='output-container', className='chart-grid', style={flex}),
 ])
-
+]]
 #TASK 2.4: Creating Callbacks
 # Define the callback function to update the input container based on the selected statistics
 @app.callback(
@@ -81,8 +86,8 @@ def update_input_container(selected_statistics):
       Input(component_id='select-year', component_property='value') ])
 
 
-def update_output_container(selected_statistics, selected_year):
-    if Yearly Statistics == 'Recession Period Statistics':
+def update_output_container(selected_statistics, input_year):
+    if selected_statistics == 'Recession Period Statistics':
         # Filter the data for recession periods
         recession_data = data[data['Recession'] == 1]
         
