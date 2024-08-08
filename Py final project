@@ -50,20 +50,20 @@ options=[
                 {'label': 'Recession Period Statistics', 'value' : 'Recession Period Statistics'} 
         ],
 value='Select Statistics',
-            value='Yearly Statistics',
+value='Yearly Statistics',
             placeholder='Select a report type'
         )
     ]),
 html.Div([dcc.Dropdown(
             id='Select-year',
-            options=[{'label': i, 'value': i} for i in year_list], style={'display':'flex'}),
+            options=[{'label': i, 'value': i} for i in year_list], style={'display':'flex'}),]),
            value='Select-year',
             ])
             
 
 html.Div([#TASK 2.3: Add a division for output display
 html.Div(id='output-container', className='chart-grid', style={flex}),
-
+]]
 ])
 #TASK 2.4: Creating Callbacks
 # Define the callback function to update the input container based on the selected statistics
